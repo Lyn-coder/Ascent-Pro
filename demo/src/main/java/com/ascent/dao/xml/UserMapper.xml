@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ascent.dao.UserMapper">
+
+    <select id="selectUserByUsername" resultType="com.ascent.pojo.User">
+        select
+               *
+        from
+             `USER`
+        where
+              `username` = #{username}
+        and
+              `password` = #{password}
+    </select>
+
+    <select id="selectUserList" resultType="com.ascent.pojo.User">
+        select
+               *
+        from
+             `USER`
+        where
+            `deleted` = 0
+    </select>
+
+    <insert id="addUser" parameterType="com.ascent.pojo.User">
+        insert into `USER`
+            (username, password)
+        values (
+                #{username},
+                #{password}
+               )
+    </insert>
+    
+    <update id="deleteUser">
+        update `USER`
+            set deleted = 1
+        where username = #{username}
+    </update>
+
+    <update id="changeRole">
+        update
+            `USER`
+        set
+            role = #{role}
+        where
+            username = #{username}
+    </update>
+
+    <update id="updateUserInfo">
+        update
+            `USER`
+        set
+            username = #{username},
+            email = #{email},
+            phone = #{phone},
+            company=#{company}
+        where
+            username = #{username}
+    </update>
+
+
+</mapper>

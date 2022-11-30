@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 1200px;
+            height: 1000px;
+        }
+
+        #div-select-one {
+            width: 700px;
+            height: 200px;
+            position: relative;
+        }
+
+        #div-select-two {
+            width: 500px;
+            height: 100px;
+            position: absolute;
+            border: 2px solid gray;
+            padding: 4px;
+            display: none;
+        }
+
+        #div-select-two li {
+            list-style-type: none;
+            display: inline-block;
+        }
+
+        .innerDiv {
+            width: 500px;
+            height: 100px;
+            position: absolute;
+            border: 2px solid gray;
+            padding: 4px;
+            display: none;
+        }
+    </style>
+
+    <script>
+        function showOneDiv() {
+            document.getElementById("div-select-two").style.display = 'block';
+        }
+
+        function hideOneDiv() {
+            document.getElementById("div-select-two").style.display = 'none';
+            let divs = document.getElementsByClassName("innerDiv");
+            for (let i = 0; i < divs.length; i++) {
+                divs[i].style.display = 'none';
+            }
+        }
+
+        function showTwoDiv(idStr) {
+            let divs = document.getElementsByClassName("innerDiv");
+            for (let i = 0; i < divs.length; i++) {
+                divs[i].style.display = 'none';
+            }
+            document.getElementById("div-"+idStr).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    
+    <div id="container">
+        <div id="div-select-one" onmouseleave="hideOneDiv()">
+            <button onmouseover="showOneDiv()" >筛选</button>
+            <div id="div-select-two">
+                <ul>
+                    <li><button onclick="showTwoDiv('west')">西药</button></li>
+                    <div class="innerDiv" id="div-west">
+                        <ul>
+                            <li>a</li>
+                            <li>a</li>
+                            <li>a</li>
+                        </ul>
+                    </div>
+                    <li><button onclick="showTwoDiv('east')">中药</button></li>
+                    <div class="innerDiv" id="div-east">
+                        <ul>
+                            <li>b</li>
+                            <li>b</li>
+                            <li>b</li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
